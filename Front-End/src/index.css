@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #e9e9e9;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 15px;
+  margin: 0%;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+.menu {
+  width: 210px;
+}
