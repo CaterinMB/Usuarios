@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react'
+import { createContext, useState, useContext, useEffect } from 'react'
 import { createRoleRequest, getRolesRequest, getRoleRequest, updateRoleRequest, deleteRoleRequest, statusRoleRequest } from '../api/role.js'
 
 export const RoleContext = createContext();
@@ -15,13 +15,13 @@ export const RoleProvider = ({ children }) => {
 
     const [role, setRole] = useState();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [ loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedRole = localStorage.getItem("roles");
         if (storedRole) {
             setRole(JSON.parse(storedRole));
-            setLoading(false); 
+            setLoading(false);
         } else {
             loadRole();
         }
@@ -31,10 +31,10 @@ export const RoleProvider = ({ children }) => {
         try {
             const res = await getRolesRequest();
             setRole(res.data);
-            setLoading(false); 
+            setLoading(false);
         } catch (error) {
             console.error(error);
-            setLoading(false); 
+            setLoading(false);
         }
     }
 
@@ -58,6 +58,15 @@ export const RoleProvider = ({ children }) => {
         }
     }
 
+    const getRol = async (id) => {
+        try {
+            const res = await getRoleRequest(id);
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const toggleRoleStatus = async (id) => {
         try {
             const res = await statusRoleRequest(id);
@@ -65,7 +74,7 @@ export const RoleProvider = ({ children }) => {
             if (res.status === 200) {
                 setRole((prevRole) =>
                     prevRole.map((roles) =>
-                    roles.ID_ROL === id ? { ...roles, Estado: !roles.Estado } : roles
+                        roles.ID_ROL === id ? { ...roles, Estado: !roles.Estado } : roles
                     )
                 );
             }
@@ -98,6 +107,7 @@ export const RoleProvider = ({ children }) => {
                 role,
                 createRole,
                 getRoles,
+                getRol,
                 loadRole,
                 toggleRoleStatus,
                 updateRole,

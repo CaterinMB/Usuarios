@@ -33,7 +33,13 @@ function CreateRole({ onClose }) {
             <label htmlFor="Nombre_Categoria" className="mb-2 block">Nombre del rol:</label>
             <input
               type="text"
-              {...register("Nombre_Rol", { required: 'Este campo es requerido', pattern: { value: /^[A-ZÁÉÍÓÚ][a-záéíóú\s]*[a-záéíóú]$/, message: 'El nombre del rol debe tener la primera letra en mayúscula y solo letras.' } })}
+              {...register("Nombre_Rol", {
+                required: 'Este campo es requerido',
+                pattern: {
+                  value: /^[A-ZÁÉÍÓÚ][a-záéíóú\s]*[a-záéíóú]$/,
+                  message: 'El nombre del rol debe tener la primera letra en mayúscula y solo letras.'
+                }
+              })}
               className='w-full bg-white text-[#201E1E] border-[#201E1E] border rounded-md py-2 px-4'
               placeholder="Nombre del Rol"
               autoFocus

@@ -13,37 +13,12 @@ export const useUser = () => {
 
 export const UserProvider = ({ children }) => {
 
-    const [user, setUser] = useState();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const storedUser = localStorage.getItem("users");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-            setLoading(false); 
-        } else {
-            loadUser();
-        }
-    }, []);
-
-    const loadUser = async () => {
-        try {
-            const res = await getUsersRequest();
-            setUser(res.data);
-            setLoading(false); 
-        } catch (error) {
-            console.error(error);
-            setLoading(false); 
-        }
-    }
+    const [user, setUser] = useState([]);
 
     const createUser = async (user) => {
         try {
             const res = await registerRequest(user);
-            console.log(res.data);
-            setUser(res.data);
-            setIsAuthenticated(true);
+            getUsers();
         } catch (error) {
             console.log(error);
         }
@@ -55,6 +30,15 @@ export const UserProvider = ({ children }) => {
             setUser(res.data)
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    const getUser = async (id) => {
+        try {
+            const res = await getUserRequest(id);
+            return res.data
+        } catch (error) {
+            console.error(error);
         }
     }
 
@@ -98,11 +82,10 @@ export const UserProvider = ({ children }) => {
                 user,
                 createUser,
                 getUsers,
-                loadUser,
+                getUser,
                 toggleUserStatus,
                 updateUser,
                 deleteUser,
-                isAuthenticated,
             }}
         >
             {children}
