@@ -7,9 +7,9 @@ function UserCard ({ user, onEdit, onDelete }) {
   const { toggleUserStatus } = useUser();
   const { role } = useRole();
 
-  const rol = role.find(
+  const roles = user ? role.find(
     (rol) => rol.ID_ROL === user.Rol_ID
-  );
+  ) : null;
 
   const barraClass = user.Estado ? "" : "desactivado";
 
@@ -19,9 +19,8 @@ function UserCard ({ user, onEdit, onDelete }) {
       <td className="border border-gray-400 px-4 py-2 text-center width-column">{user.Documento}</td>
       <td className="border border-gray-400 px-4 py-2 text-center width-column">{user.Nombre_Usuario}</td>
       <td className="border border-gray-400 px-4 py-2 text-center width-column">{user.Apellido_Usuario}</td>
-      <td className="border border-gray-400 px-4 py-2 text-center width-column">{user.Email}</td>
       <td className="border border-gray-400 px-4 py-2 text-center width-column">
-        {rol && rol.Nombre_Rol}
+        {roles && roles.Nombre_Rol}
       </td>
       <td className={`border border-gray-400 px-4 py-2 text-center width-column ${barraClass}`}>
         {user.Estado ? "Habilitado" : "Deshabilitado"}
@@ -32,6 +31,7 @@ function UserCard ({ user, onEdit, onDelete }) {
             onClick={onEdit}
             className={`text-orange-500 hover:text-orange-700 mr-2 ${!user.Estado ? "text-gray-400 cursor-not-allowed" : ""}`}
             disabled={!user.Estado}
+            style={{ marginLeft: "14%" }}
           >
             <AiFillEdit size={24} />
           </button>

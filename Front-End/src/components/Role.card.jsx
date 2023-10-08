@@ -27,7 +27,7 @@ function RoleCard({ role, onEdit, onDelete }) {
   return (
     <tr>
       <td className="border border-gray-400 px-4 py-2 text-center width-column">
-        {role.Nombre_Categoria}
+        {role.Nombre_Rol}
       </td>
       <td className="border border-gray-400 px-4 py-2 text-center width-column">
         Van los permisos, cuando sepa como hacerlo :D
@@ -38,25 +38,19 @@ function RoleCard({ role, onEdit, onDelete }) {
         {role.Estado ? "Habilitado" : "Deshabilitado"}
       </td>
       <td className="border border-gray-400 px-4 py-2 text-center">
-        <div style={{ display: "flex", marginLeft: "19%" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <button
             onClick={onEdit}
-            className={`text-orange-500 hover:text-orange-700 mr-2 ${!role.Estado
-              ? "text-gray-400 cursor-not-allowed"
-              : ""
-              }`}
+            className={`text-orange-500 hover:text-orange-700 mr-2 ${!role.Estado ? "text-gray-400 cursor-not-allowed" : ""}`}
             disabled={!role.Estado || !canChangeRoleStatus}
-            style={{ marginLeft: "40px" }}
+            style={{ marginLeft: "14%" }}
           >
             <AiFillEdit size={24} />
           </button>
           <button
             onClick={onDelete}
-            className={`text-red-500 hover:text-red-800 mr-2 ${!Category_supplies.Estado
-              ? "text-gray-400 cursor-not-allowed"
-              : ""
-              }`}
-            style={{ marginRight: "-25px" }}
+            className={`text-red-500 hover:text-red-800 mr-2 ${!role.Estado ? "text-gray-400 cursor-not-allowed" : ""}`}
+            style={{ marginRight: "-20px" }}
             disabled={!role.Estado || !canChangeRoleStatus}
           >
             <AiFillDelete size={24} />

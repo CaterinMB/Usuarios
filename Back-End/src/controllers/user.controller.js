@@ -82,14 +82,15 @@ export const updateUser = async (req, res) => {
     const { id } = req.params
 
     try {
-        const { Apellido_Usuario, Nombre_Usuario, Contrasena, Email, Rol_ID } = req.body
+        const { TipoDocumento, Documento, Apellido_Usuario, Nombre_Usuario, Email, Rol_ID } = req.body
 
         const updateUser = await user.findByPk(id)
 
+        updateUser.TipoDocumento = TipoDocumento
+        updateUser.Documento = Documento
         updateUser.Nombre_Usuario = Nombre_Usuario
         updateUser.Apellido_Usuario = Apellido_Usuario
         updateUser.Rol_ID = Rol_ID
-        updateUser.Contrasena = Contrasena
         updateUser.Email = Email
 
         await updateUser.save();

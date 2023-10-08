@@ -3,35 +3,30 @@ import { useUser } from '../context/UserContext';
 import CreateUser from './CreateUser';
 import EditUser from './EditUser';
 import DeleteUser from './DeleteUser';
-import { useRole } from "../context/RoleContext";
 import UserCard from '../components/User.card';
 
 function ListUser() {
     const { user, getUsers, deleteUser } = useUser();
-    const { role } = useRole();
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredUser, setFilteredUser] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [supplyToEdit, setSupplyToEdit] = useState(null);
-    const [supplyToDelete, setSupplyToDelete] = useState(null);
+    const [userToEdit, setUserToEdit] = useState(null);
+    const [userToDelete, setUserToDelete] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 7;
-
 
     useEffect(() => {
         getUsers();
     }, []);
 
-    if (user.length < 0) return <h1>No hay insumos</h1>;
-
     useEffect(() => {
         if (searchTerm === '') {
             setFilteredUser(user);
         } else {
-            const filtered = user.filter((supply) =>
-                supply.Nombre_Insumo.toLowerCase().includes(searchTerm.toLowerCase())
+            const filtered = user.filter((user) =>
+                user.Nombre_Usuario.toLowerCase().includes(searchTerm.toLowerCase())
             );
             setFilteredUser(filtered);
         }
@@ -45,19 +40,19 @@ function ListUser() {
         getUsers();
     };
 
-    const handleEdit = (supply) => {
-        setUserToEdit(supply);
+    const handleEdit = (user) => {
+        setUserToEdit(user);
         setIsEditModalOpen(true);
     };
 
-    const handleDelete = (supply) => {
-        setUserToDelete(supply);
+    const handleDelete = (user) => {
+        setUserToDelete(user);
         setIsDeleteModalOpen(true);
     };
 
     const confirmDelete = () => {
-        if (supplyToDelete) {
-            deleteUser(supplyToDelete.ID_INSUMO);
+        if (userToDelete) {
+            deleteUser(userToDelete.ID_USUARIO);
             setUserToDelete(null);
             setIsDeleteModalOpen(false);
         }
@@ -101,18 +96,17 @@ function ListUser() {
             <table className="table-auto mx-auto w-full">
                 <thead>
                     <tr className="bg-[#201E1E] text-white">
-                        <th className="border border-gray-400 px-4 py-2 w-1/7">Tipo de documento</th>
-                        <th className="border border-gray-400 px-4 py-2 w-1/7">N° de documento</th>
-                        <th className="border border-gray-400 px-4 py-2 w-1/7">Nombre</th>
-                        <th className="border border-gray-400 px-7 py-2 w-1/7">Apellido</th>
-                        <th className="border border-gray-400 px-4 py-2 w-1/7">Correo</th>
+                        <th className="border border-gray-400 px-2 py-2 w-1/7">Tipo</th>
+                        <th className="border border-gray-400 px-2 py-2 w-1/7">N° documento</th>
+                        <th className="border border-gray-400 px-2 py-2 w-1/7">Nombre</th>
+                        <th className="border border-gray-400 px-2 py-2 w-1/7">Apellido</th>
                         <th className="border border-gray-400 px-2 py-2 w-1/7">Rol</th>
-                        <th className="border border-gray-400 px-8 py-2 w-1/7">Estado</th>
+                        <th className="border border-gray-400 px-2 py-2 w-1/7">Estado</th>
                         <th className="border border-gray-400 px-4 py-2 w-1/7">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {userToDisplay.map((supply) => (
+                    {userToDisplay.map((user) => (
                         <UserCard
                             user={user}
                             key={user.ID_USUARIO}
@@ -143,7 +137,7 @@ function ListUser() {
                 <div className="fixed inset-0 flex items-center justify-center z-50">
                     <div className="modal-overlay" onClick={() => setIsEditModalOpen(false)}></div>
                     <div className="modal-container">
-                        <EditUser onClose={() => setIsEditModalOpen(false)} UserToEdit={userToEdit} />
+                        <EditUser onClose={() => setIsEditModalOpen(false)} userToEdit={userToEdit} />
                     </div>
                 </div>
             )}

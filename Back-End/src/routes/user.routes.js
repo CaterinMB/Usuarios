@@ -7,7 +7,7 @@ const router = Router();
 router.get('/user', getUsers);
 router.get('/user/:id', getUser);
 router.post('/register', checkForDuplicates, register);
-router.put('/user/:id', checkForDuplicates, updateUser);
+router.put('/user/:id', updateUser);
 router.put("/user/toggle/:id", toggleUserStatus);
 router.delete('/user/:id', deleteUser);
 

@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
         }
     }
 
-    const getUsers = async (user) => {
+    const getUsers = async () => {
         try {
             const res = await getUsersRequest();
             setUser(res.data)

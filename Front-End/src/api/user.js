@@ -1,8 +1,8 @@
 import axios from './axios.js'
 
-export const registerRequest = (user) => axios.post(`/register`, user);
+export const registerRequest = (users) => axios.post(`/register`, users);
 export const getUsersRequest = () => axios.get(`/user`);
-export const getUserRequest = (id) => axios.get(`/user/${id}`);
-export const updateUserRequest = (ID_USUARIO, user) => axios.put(`/user/${ID_USUARIO}`, user);
-export const statusUserRequest = (ID_USUARIO, user) => axios.put(`/user/${ID_USUARIO}`, user);
-export const deleteUserRequest = (id) => axios.delete(`/user/${id}`);
+export const getUserRequest = (ID_USUARIO) => axios.get(`/user/${ID_USUARIO}`);
+export const updateUserRequest = (ID_USUARIO, users) => axios.put(`/user/${ID_USUARIO}`, users);
+export const statusUserRequest = (ID_USUARIO) => axios.put(`/user/toggle/${ID_USUARIO}`);
+export const deleteUserRequest = (ID_USUARIO) => axios.delete(`/user/${ID_USUARIO}`);

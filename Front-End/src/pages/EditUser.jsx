@@ -95,17 +95,18 @@ function EditUser({ onClose, userToEdit }) {
 
     return (
         <div className='max-w-md mx-auto p-4 down'>
-            <h1 className="text-3xl font-semibold text-center mb-4">Nuevo Usuario</h1>
+            <h1 className="text-3xl font-semibold text-center mb-4">Editar Usuario</h1>
             <form onSubmit={onSubmit}>
-                <div className="mb-6">
-                    <div className='mb-3'>
-                        <label htmlFor="TipoDocumento" className="mb-2 block">Tipo de documento: <p className='text-red-600'>*</p></label>
+
+                <div className='columnas inferior'>
+                    <div className='mb-1'>
+                        <label htmlFor="TipoDocumento" className="mb-2 block">Tipo de documento: <strong>*</strong></label>
                         <Select
                             options={typeOptions}
                             {...register("TipoDocumento", {
                                 required: 'El tipo es obligatorio',
                             })}
-                            value={selectedType.find(option => option.value === selectedType)}
+                            value={typeOptions.find(option => option.value === selectedType)}
                             onChange={(selectedOption) => setSelectedType(selectedOption.value)}
                             menuPlacement="auto"
                             menuShouldScrollIntoView={false}
@@ -122,36 +123,34 @@ function EditUser({ onClose, userToEdit }) {
                         {errors.TipoDocumento && <p className="text-red-500">{errors.TipoDocumento.message}</p>}
                     </div>
 
-                    <div className='mb-3'>
-                        <label htmlFor="Documento" className="mb-2 block">Número de identidad: <p className='text-red-600'>*</p></label>
+                    <div className='mb-1'>
+                        <label htmlFor="Documento" className="mb-2 block">Número de identidad: <strong>*</strong></label>
                         <input
                             type="number"
                             {...register("Documento", {
                                 required: 'El documento es obligatoria',
                                 validate: (value) => {
                                     const parsedValue = parseInt(value);
-                                    if (isNaN(parsedValue) || parsedValue < 10000000 || parsedValue > 99999999) {
+                                    if (isNaN(parsedValue) || parsedValue < 10000000 || parsedValue > 9999999999) {
                                         return 'El número no es valido, debe tener de 8 a 10 caracteres.';
                                     }
                                     return true;
                                 }
                             })}
-                            className='w-full bg-zinc-500 text-while px-2 py-1 rounded-md my-1'
+                            className='w-full bg-white text-[#201E1E] border-[#201E1E] border rounded-md py-2 px-4'
                             placeholder="Documento"
                         />
                         {errors.Documento && (<p className='text-red-500'>{errors.Documento.message}</p>)}
                     </div>
 
-                </div>
-                <div className="mb-6">
-                    <div className='mb-3'>
-                        <label htmlFor="Nombre_Usuario" className="mb-2 block">Nombres: <p className='text-red-600'>*</p></label>
+                    <div className='mb-1'>
+                        <label htmlFor="Nombre_Usuario" className="mb-2 block">Nombres: <strong>*</strong></label>
                         <input
                             type="text"
                             {...register("Nombre_Usuario", {
                                 required: 'El nombre es obligatorio',
                                 pattern: {
-                                    value: /^[A-ZÁÉÍÓÚ][a-záéíóú\s]*[a-záéíóú]$/,
+                                    value: /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ\s]*[a-záéíóúñ]$/,
                                     message: 'El nombre del usuario debe tener la primera letra en mayúscula y solo letras.'
                                 }
                             })}
@@ -161,14 +160,14 @@ function EditUser({ onClose, userToEdit }) {
                         {errors.Nombre_Usuario && <p className="text-red-500">{errors.Nombre_Usuario.message}</p>}
                     </div>
 
-                    <div className='mb-3'>
-                        <label htmlFor="Apellido_Usuario" className="mb-2 block">Apellidos: <p className='text-red-600'>*</p></label>
+                    <div className='mb-1'>
+                        <label htmlFor="Apellido_Usuario" className="mb-2 block">Apellidos: <strong>*</strong></label>
                         <input
                             type="text"
                             {...register("Apellido_Usuario", {
                                 required: 'El apellido es obligatorio',
                                 pattern: {
-                                    value: /^[A-ZÁÉÍÓÚ][a-záéíóú\s]*[a-záéíóú]$/,
+                                    value: /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ\s]*[a-záéíóúñ]$/,
                                     message: 'El apellido del usuario debe tener la primera letra en mayúscula y solo letras.'
                                 }
                             })}
@@ -177,11 +176,9 @@ function EditUser({ onClose, userToEdit }) {
                         />
                         {errors.Apellido_Usuario && <p className="text-red-500">{errors.Apellido_Usuario.message}</p>}
                     </div>
-                </div>
 
-                <div className="mb-6">
-                    <div className='mb-3'>
-                        <label htmlFor="Email" className="mb-2 block">Correo Electrónico: <p className='text-red-600'>*</p></label>
+                    <div className="mb-1">
+                        <label htmlFor="Email" className="mb-2 block">Correo Electrónico: <strong>*</strong></label>
                         <input
                             type="email"
                             {...register("Email", {
@@ -197,54 +194,29 @@ function EditUser({ onClose, userToEdit }) {
                         {errors.Email && <p className="text-red-500">{errors.Email.message}</p>}
                     </div>
 
-                    <div className='mb-3'>
-                        <label htmlFor="Contrasena" className="mb-2 block">Contraseña: <p className='text-red-600'>*</p></label>
-                        <input
-                            type="text"
-                            {...register("Contrasena", {
-                                required: 'La contraseña es obligatorio',
-                                pattern: {
-                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)(?=.*\w).*$/,
-                                    message: 'La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial.'
+                    <div className="mb-1">
+                        <label htmlFor="Rol_ID" className="mb-2 block">Rol: <strong>*</strong></label>
+                        <Select
+                            options={rolOptions}
+                            {...register("Rol_ID")}
+                            value={rolOptions.find(option => option.value === selectedRole)}
+                            onChange={(selectedRol) => setSelectedRole(selectedRol.value)}
+                            menuPlacement="auto"
+                            menuShouldScrollIntoView={false}
+                            maxMenuHeight={132}
+                            styles={customStyles}
+                            theme={(theme) => ({
+                                ...theme,
+                                colors: {
+                                    ...theme.colors,
+                                    primary: '#201E1E',
                                 },
-                                minLength: {
-                                    value: 5,
-                                    message: 'La contraseña debe tener al menos 5 caracteres'
-                                },
-                                maxLength: {
-                                    value: 35,
-                                    message: 'La contraseña no puede tener más de 35 caracteres'
-                                }
                             })}
-                            placeholder="Contraseña"
-                            className='w-full bg-white text-[#201E1E] border-[#201E1E] border rounded-md py-2 px-4'
                         />
-                        {errors.Contrasena && <p className="text-red-500">{errors.Contrasena.message}</p>}
+                        {errors.Rol_ID && <p className="text-red-500">{errors.Rol_ID.message}</p>}
                     </div>
                 </div>
-
-                <div className="mb-3 inferior">
-                    <label htmlFor="Rol_ID" className="mb-2 block">Rol: <p className='text-red'>*</p></label>
-                    <Select
-                        options={rolOptions}
-                        {...register("Rol_ID")}
-                        value={rolOptions.find(option => option.value === selectedRole)}
-                        onChange={(selectedRol) => setSelectedRole(selectedRol.value)}
-                        menuPlacement="auto"
-                        menuShouldScrollIntoView={false}
-                        maxMenuHeight={132}
-                        styles={customStyles}
-                        theme={(theme) => ({
-                            ...theme,
-                            colors: {
-                                ...theme.colors,
-                                primary: '#201E1E',
-                            },
-                        })}
-                    />
-                    {errors.Rol_ID && <p className="text-red-500">{errors.Rol_ID.message}</p>}
-                </div>
-                <div className="mt-4 flex justify-between items-center">
+                <div className="mt-1 flex justify-between items-center">
                     <button type="submit" className='bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded boton-izquierda'>
                         Confirmar
                     </button>

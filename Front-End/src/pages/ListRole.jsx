@@ -20,8 +20,6 @@ function ListRole() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 7;
 
-    if (role.length < 0) return <h1>No hay roles ingresados.</h1>;
-
     const { user, getUsers } = useUser();
 
     useEffect(() => {
@@ -33,7 +31,7 @@ function ListRole() {
         if (searchTerm === '') {
             setFilteredRole(role);
         } else {
-            const filtered = role.filter(rol =>
+            const filtered = role.filter((rol) =>
                 rol.Nombre_Rol.toLowerCase().includes(searchTerm.toLowerCase())
             );
             setFilteredRole(filtered);
@@ -49,7 +47,7 @@ function ListRole() {
             setIsDeleteModalOpen(true);
             setRoleToDelete(rol);
             setCannotDelete(
-                'No se puede eliminar esta categoría de insumo porque está asociada a insumos existentes.'
+                'No se puede eliminar este rol porque está asigando a usuario(s) existente(s).'
             );
         } else {
             setIsDeleteModalOpen(true);
@@ -92,7 +90,7 @@ function ListRole() {
 
     return (
         <div className="mx-auto mt-4 contenedor">
-            <h1 className="text-3xl font-bold text-center mb-20">Categoría de Insumos</h1>
+            <h1 className="text-3xl font-bold text-center mb-20">Roles</h1>
             <div className="flex justify-between items-center mb-4">
                 <button
                     onClick={navigateToCreateRole}
@@ -115,9 +113,9 @@ function ListRole() {
             <table className="table-auto mx-auto w-full">
                 <thead>
                     <tr className="bg-[#201E1E] text-white">
-                        <th className="border border-gray-400 px-4 py-2">Nombre</th>
-                        <th className="border border-gray-400 px-4 py-2">Permisos</th>
-                        <th className="border border-gray-400 px-4 py-2">Estado</th>
+                        <th className="border border-gray-400 px-2 py-2">Nombre</th>
+                        <th className="border border-gray-400 px-7 py-2">Permisos</th>
+                        <th className="border border-gray-400 px-2 py-2">Estado</th>
                         <th className="border border-gray-400 px-4 py-2">Acciones</th>
                     </tr>
                 </thead>

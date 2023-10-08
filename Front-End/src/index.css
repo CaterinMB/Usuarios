@@ -149,7 +149,7 @@ h1 {
 }
 
 .down {
-  margin-top: -20px;
+  margin-top: -10px;
 }
 
 .inferior {
@@ -170,4 +170,14 @@ h1 {
 
 .user-card:hover {
   background-color: #e0e0e0;
+}
+
+strong {
+  color: red;
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Esto creará 3 columnas igualmente espaciadas */
+  gap: 5px; /* Espacio entre los elementos */
 }
