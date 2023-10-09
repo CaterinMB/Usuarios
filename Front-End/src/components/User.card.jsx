@@ -7,9 +7,9 @@ function UserCard ({ user, onEdit, onDelete }) {
   const { toggleUserStatus } = useUser();
   const { role } = useRole();
 
-  const roles = user ? role.find(
+  const roles = role.find(
     (rol) => rol.ID_ROL === user.Rol_ID
-  ) : null;
+  );
 
   const barraClass = user.Estado ? "" : "desactivado";
 

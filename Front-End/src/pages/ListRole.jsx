@@ -120,12 +120,12 @@ function ListRole() {
                     </tr>
                 </thead>
                 <tbody>
-                    {roleToDisplay.map(rol => (
+                    {roleToDisplay.map(role => (
                         <RoleCard
-                            Role={rol}
-                            key={rol.ID_ROL}
-                            onEdit={() => handleEdit(rol)}
-                            onDelete={() => handleDelete(rol)}
+                            Role={role}
+                            key={role.ID_ROL}
+                            onEdit={() => handleEdit(role)}
+                            onDelete={() => handleDelete(role)}
                         />
                     ))}
                 </tbody>
@@ -172,7 +172,7 @@ function ListRole() {
                     <span>Página {currentPage}</span>
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={endIndex >= role.length}
+                        disabled={role && endIndex >= role.length}
                         className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-5 rounded border border-orange-500 hover:border-orange-700 focus:outline-none focus:shadow-outline ml-2"
                     >
                         Siguiente

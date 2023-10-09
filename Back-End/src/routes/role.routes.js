@@ -7,7 +7,7 @@ const router = Router();
 router.get('/role', getRoles);
 router.get('/role/:id', getRole);
 router.post('/role', checkForDuplicates, createRoles);
-router.put('/role/:id', checkForDuplicates, updateRole);
+router.put('/role/:id', updateRole);
 router.put('/role/toggle/:id', toggleRoleStatus);
 router.delete('/role/:id', deleteRole);
 router.get('/role/:id/user', getRoleUser);

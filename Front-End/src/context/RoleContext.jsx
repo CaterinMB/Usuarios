@@ -49,7 +49,7 @@ export const RoleProvider = ({ children }) => {
         }
     }
 
-    const getRoles = async (role) => {
+    const getRoles = async () => {
         try {
             const res = await getRolesRequest();
             setRole(res.data)

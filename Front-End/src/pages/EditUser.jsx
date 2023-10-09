@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 import { useForm } from 'react-hook-form';
 import { useUser } from '../context/UserContext';
 import { useRole } from '../context/RoleContext';
-import Select from 'react-select';
 
 function EditUser({ onClose, userToEdit }) {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm({

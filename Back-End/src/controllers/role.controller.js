@@ -53,7 +53,8 @@ export const createRoles = async (req, res) => {
 
     try {
         const newRole = await role.create({
-            Nombre_Rol
+            Nombre_Rol,
+            Estado: true
         })
 
         res.json(newRole);
