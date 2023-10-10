@@ -193,12 +193,12 @@ const Navbar = () => {
             </div>
           </li>
         </ul>
-        <div className="mt-auto flex justify-end space-x-3 mr-8 w-full">
+        <div className="menuAbajo mt-auto flex justify-end space-x-3 mr-8 w-full">
           <button
             onClick={() => {
               navigate('/role');
             }}
-            className="text-white bg-[#201E1E] rounded-md p-2 w-full"
+            className="menuAbajo text-white bg-[#201E1E] rounded-md p-1 w-full"
           >
             <img src={configuracion} alt="Configuración" className="w-9 h-9" />
           </button>
@@ -206,7 +206,7 @@ const Navbar = () => {
             onClick={() => {
               navigate('/user');
             }}
-            className="text-white bg-[#201E1E] rounded-md p-2 w-full"
+            className="menuAbajo text-white bg-[#201E1E] rounded-md p-1 w-full"
           >
             <img src={usuario} alt="Usuario" className="w-8 h-8" />
           </button>
